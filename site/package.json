@@ -11,6 +11,8 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.6",
+    "lodash": "^4.17.21",
     "sass": "^1.77.6",
     "vue": "^3.4.29"
   },
