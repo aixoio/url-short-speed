@@ -1,0 +1,48 @@
+name: "urlshortspeed"
+services:
+  db:
+    image: postgres:16.3
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    volumes:
+      - ./pgdata/:/var/lib/postgresql/data
+  server:
+    build: ./server/
+    networks:
+      - network
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PORT=8080
+      - DB_URL=postgres://urlshortspeed:urlshortspeed@db:5432/urlshortspeed?sslmode=disable
+  site:
+    build: ./site/
+    networks:
+      - network
+    depends_on:
+      db:
+        condition: service_healthy
+      server:
+        condition: service_started
+  nginx:
+    build: ./nginx/
+    depends_on:
+      db:
+        condition: service_healthy
+      server:
+        condition: service_started
+      site:
+        condition: service_started
+    networks:
+      - network
+    ports:
+      - "80:80"
+networks:
+  - network
