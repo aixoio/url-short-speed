@@ -12,7 +12,7 @@ func StartRouter() {
 	app := fiber.New()
 
 	app.Post("/api/link/new", handlers.NewLinkHandler)
-	app.Post("/api/follow/:short", handlers.FollowLinkHandler)
+	app.Get("/api/follow/:short", handlers.FollowLinkHandler)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
