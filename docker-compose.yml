@@ -12,6 +12,10 @@ services:
       start_period: 80s
     volumes:
       - ./pgdata/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=urlshortspeed
+      - POSTGRES_PASSWORD=urlshortspeed
+      - POSTGRES_DB=urlshortspeed
   server:
     build: ./server/
     networks:
