@@ -49,4 +49,4 @@ services:
     ports:
       - "80:80"
 networks:
-  - network
+  network:
