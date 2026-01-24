@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.17.6",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "sass": "^1.77.6",
     "vue": "^3.4.29"
   },
